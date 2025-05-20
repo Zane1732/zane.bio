@@ -1,39 +1,51 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const userId = "980789650006372362"; // Replace with your hardcoded user ID
-    const apiUrl = `https://discord-lookup-api-alpha.vercel.app/v1/user/${userId}`;
-
-    // Elements
-    const profilePicture = document.getElementById('profile-picture');
-    const avatarFrame = document.getElementById('avatar-frame');
-
-    // Fetch user data from the API
-    fetch(apiUrl)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log("API Response:", data); // Debug: log the response
-
-            // Set profile picture
-            const avatarUrl = data.avatar ? data.avatar.link : './assets/pfp/default.jpg';
-            profilePicture.src = avatarUrl;
-
-            // Set avatar frame if available
-            if (data.avatar_decoration && data.avatar_decoration.asset) {
-                const asset = data.avatar_decoration.asset;
-                const frameUrl = `https://cdn.discordapp.com/avatar-decoration-presets/${asset}.png`;
-             // console.log("Avatar Frame URL:", frameUrl); // Debug: log frame URL
-                avatarFrame.src = frameUrl;
-                avatarFrame.style.display = 'block'; // Show the avatar frame
-            } else {
-                console.warn("No avatar frame asset found.");
-            }
-
-        })
-        .catch(error => {
-            console.error("Error fetching user data:", error);
-        });
-});
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
+<link rel="stylesheet" type="text/css" href="styles.css"> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="icon" type="image/x-icon" href="./assets/favico/default.ico">
+</head>
+<body class="custom-cursor">
+  <!-- Background Elements -->
+  <div id="video-background">
+    <video autoplay muted loop id="myVideo"> <!-- Video background -->
+      <source src="./assets/back/default.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+    <div id="audio-background">
+      <audio autoplay loop id="myAudio"> <!-- Audio background -->
+        <source src="./assets/music/default.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+    <div id="blurred-box">
+      <img id="profile-picture" src="./assets/pfp/default.jpg" alt="Profile Picture">
+      <img id="avatar-frame" src="" alt="Avatar Frame">
+      <p id="username" style="color: white; font-weight: bold; font-size: large;">Yoghurt1337</p> <!-- Username -->
+      <!-- User Description -->
+      <div class="user-description">
+        <p id="user-description" style="color: white;">made with ❤️ </p>
+      </div>
+      <!-- Links -->
+      <div class="links">
+        <a href="https://soundcloud.com/nightyouth1337" target="_blank">
+          <i class="fab fa-soundcloud"></i>
+        </a> 
+        <a href="https://github.com/Yoghurt1337" target="_blank">
+          <i class="fab fa-github"></i> 
+        </a> 
+        <a href="https://www.paypal.com/paypalme/lilpeepvb1" target="_blank">
+          <i class="fa-brands fa-paypal"></i>
+        </a> 
+      </div>
+    </div>
+  </div>
+  <!-- Admin link -->
+  <a href="admin.html" id="admin-link" style="position: fixed; bottom: 5px; right: 5px; color: rgba(255, 255, 255, 0.1); text-decoration: none; font-size: 10px; z-index: 9999; font-family: monospace;">admin</a>
+  <script src="./assets/js/script.js"></script> <!-- Script for functionality -->
+  <script src="./assets/js/title.js"></script> <!-- Script for title functionality -->
+</body>
+</html>
