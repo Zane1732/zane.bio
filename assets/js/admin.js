@@ -89,9 +89,15 @@ function saveProfile() {
     localStorage.setItem('discordId', discordId);
     localStorage.setItem('profileImage', profileImage);
     
-    // Update the current username display
+    // Update profile pictures in both admin panel and main page
     document.getElementById('current-username').textContent = username;
     document.getElementById('admin-profile-pic').src = profileImage;
+    
+    // Update main page profile picture
+    const mainPageProfilePic = window.opener ? window.opener.document.getElementById('profile-picture') : null;
+    if (mainPageProfilePic) {
+        mainPageProfilePic.src = profileImage;
+    }
     
     showNotification('Profile settings saved!');
 }
