@@ -1,31 +1,27 @@
-// Array containing different titles to cycle through
-var titles = [
-  "@",
-  "@Y",
-  "@Yo",
-  "@Yog",
-  "@Yogh",
-  "@Yoghu",
-  "@Yoghur",
-  "@Yoghurt",
-  "@Yoghurt 1",
-  "@Yoghurt 13",
-  "@Yoghurt 133",
-  "@Yoghurt 1337"
-];
-
-// Function to change the title periodically
-function changeTitle() {
-  var index = 0; // Initialize index to start from the first title
-
-  // Set interval to change the title every 1000 milliseconds (1 second)
-  setInterval(function() {
-      // Set the document title to the title at the current index
-      document.title = titles[index];
-      // Increment the index and use modulo operator to ensure it stays within the bounds of the array
-      index = (index + 1) % titles.length;
-  }, 1000); // Interval set to 1000 milliseconds (1 second)
-}
-
-// Call the function to start changing the title
-changeTitle();
+document.addEventListener('DOMContentLoaded', function() {
+    // Title text array
+    const titles = [
+        "⭐ Yoghurt1337 ⭐",
+        "⭐ Welcome to my page ⭐",
+        "⭐ Bio Page ⭐"
+    ];
+    
+    let titleIndex = 0;
+    
+    // Function to change the page title
+    function changeTitle() {
+        document.title = titles[titleIndex];
+        titleIndex = (titleIndex + 1) % titles.length;
+    }
+    
+    // Change title every 3 seconds
+    setInterval(changeTitle, 3000);
+    
+    // Set initial title
+    changeTitle();
+    
+    // Update title from admin panel settings if available
+    if (localStorage.getItem('username')) {
+        titles[0] = `⭐ ${localStorage.getItem('username')} ⭐`;
+    }
+});
