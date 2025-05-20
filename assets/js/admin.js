@@ -82,22 +82,14 @@ function setupFileUpload(inputId, previewId, buttonId, isVideo = false, isAudio 
 // Save functions for each settings section
 function saveProfile() {
     const username = document.getElementById('username').value;
-    const discordId = document.getElementById('discord-id').value;
     const profileImage = document.getElementById('preview-profile').src;
     
     localStorage.setItem('username', username);
-    localStorage.setItem('discordId', discordId);
     localStorage.setItem('profileImage', profileImage);
     
-    // Update profile pictures in both admin panel and main page
+    // Update admin panel
     document.getElementById('current-username').textContent = username;
     document.getElementById('admin-profile-pic').src = profileImage;
-    
-    // Update main page profile picture
-    const mainPageProfilePic = window.opener ? window.opener.document.getElementById('profile-picture') : null;
-    if (mainPageProfilePic) {
-        mainPageProfilePic.src = profileImage;
-    }
     
     showNotification('Profile settings saved!');
 }
